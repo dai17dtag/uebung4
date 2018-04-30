@@ -5,6 +5,12 @@ import exception.MatricesNotMultipliableException;
 import exception.MatrixNotInitializedException;
 import exception.MatrixSpurNotAvailableException;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 public class MatrixTools
 {
     public static int[][] createMatrix(int m, int n)
@@ -178,5 +184,39 @@ public class MatrixTools
             }
         }
         return isNull;
+    }
+
+    public static int[][] getMatrixFromFile(String filename) throws IOException
+    {
+        int[][] returnMatrix;
+
+        File inputMatrix = new File(filename);
+        Scanner scanner = new Scanner(inputMatrix);
+
+        List<List> linesList = new ArrayList<List>();
+
+        while (scanner.hasNextLine())
+        {
+            List<Integer> line = new ArrayList<Integer>();
+            Scanner lineScanner = new Scanner(scanner.nextLine());
+            while (lineScanner.hasNextInt())
+            {
+                line.add(lineScanner.nextInt());
+            }
+            linesList.add(line);
+        }
+
+        returnMatrix = new int[linesList.size()][];
+
+        for (int i = 0; i < linesList.size(); i++)
+        {
+            returnMatrix[i] = new int[linesList.get(i).size()];
+            for (int j = 0; j < linesList.get(i).size(); j++)
+            {
+                returnMatrix[i][j] = (int) linesList.get(i).get(j);
+            }
+        }
+
+        return returnMatrix;
     }
 }

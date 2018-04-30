@@ -7,11 +7,7 @@ public class Main
 {
     public static void main (String[] args) throws Exception
     {
-
-        int[][] test = {};
-
-
-        MatrixDimension test2 = new MatrixDimension(test);
-        MatrixTools.matrixSpur(test);
+        int[][] matrix = MatrixTools.getMatrixFromFile("test.txt");
+        MatrixTools.printMatrix(matrix);
     }
 }
