@@ -53,7 +53,7 @@ public class MatrixTools
             }
         } else
         {
-            System.out.println("");
+            System.out.println();
         }
     }
 
@@ -70,9 +70,9 @@ public class MatrixTools
         int lineCount = m.length;
         int columnCount = m[0].length;
 
-        for (int lineCounter = 0; lineCounter < lineCount; lineCounter++)
+        for (int[] line : m)
         {
-            if (m[lineCounter].length != m[0].length)
+            if (line.length != m[0].length)
             {
                 isRectangle = false;
             }
@@ -138,27 +138,20 @@ public class MatrixTools
         {
             throw new MatricesNotMultipliableException("Coulumns A: " + columnsA + " , lines B: " + linesB + ", not compatible!");
         }
+        sum = new int[linesA][columnsB];
 
-        if (isMultiplicable)
+        for (int resultLinesCounter = 0; resultLinesCounter < linesA; resultLinesCounter++)
         {
-            sum = new int[linesA][columnsB];
-
-            for (int resultLinesCounter = 0; resultLinesCounter < linesA; resultLinesCounter++)
+            for (int resultColumnsCounter = 0; resultColumnsCounter < columnsB; resultColumnsCounter++)
             {
-                for (int resultColumnsCounter = 0; resultColumnsCounter < columnsB; resultColumnsCounter++)
-                {
-                    int buffer = 0;
+                int buffer = 0;
 
-                    for (int multiplyCounter = 0; multiplyCounter < linesB; multiplyCounter++)
-                    {
-                        buffer += a[resultLinesCounter][multiplyCounter] * b[multiplyCounter][resultColumnsCounter];
-                    }
-                    sum[resultLinesCounter][resultColumnsCounter] = buffer;
+                for (int multiplyCounter = 0; multiplyCounter < linesB; multiplyCounter++)
+                {
+                    buffer += a[resultLinesCounter][multiplyCounter] * b[multiplyCounter][resultColumnsCounter];
                 }
+                sum[resultLinesCounter][resultColumnsCounter] = buffer;
             }
-        } else
-        {
-            sum = null;
         }
 
         return sum;
@@ -175,9 +168,9 @@ public class MatrixTools
 
         if (!isNull)
         {
-            for (int counter = 0; counter < matrix.length; counter++)
+            for (int[] line : matrix)
             {
-                if (matrix[counter] == null)
+                if (line == null)
                 {
                     isNull = true;
                     break;
